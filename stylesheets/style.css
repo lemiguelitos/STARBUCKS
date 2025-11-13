@@ -1,5 +1,14 @@
+:root{
+    --bg-menu: rgba(220, 220, 220, .65);
+    --font-size-link: 0.9em;
+    --font-size-body: 1rem;
+    --z-fixed: 100;
+    --color:rgba(0, 0, 0, .7);
+}
+
 *{
     box-sizing: border-box;
+    
 }
 
 body{
@@ -24,61 +33,79 @@ a:hover{
     text-decoration: underline;
 }
 
-
+.header{
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: var(--z-fixed);
+}
 
 .navbar{
-    justify-content: center;
+    position: relative;
     display: flex;
-    margin-top: 20px;
-    padding-bottom: 20px;
-    box-shadow: 0px 3px 3px hsla(120, 0%, 41%, 0.5);
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px ;
 }
 
-.navlist2{
-    margin: 20px 40px 0 20px;
-    padding: 0;
+.nav__close,
+.nav__show{
+    font-size: 20px;
+    color: var(--color);
 }
 
-.navlist1{
-    margin: 20px 40px 0 20px;
-    padding: 0;
+.navlist2 li:last-child{
+    display: flex;
 }
 
-.navbar ul li{
+.nav__link{
+    position: relative;
     font-weight: bold;
-    margin-bottom: 5px;
     list-style: none;
     text-align: start;
     color: #000;
-}
-.navbar .navlist1 li svg{
-    float: left;
-    width: 40px;
-    height: 40px;
-    font-weight: bold;
-    margin-left: -70px;
-    margin-top: 1.3em;
-} 
-
-.navbar .navlist2 li svg{
-    margin-top: -5px;
+    text-decoration: none;
 }
 
-.navbar a{
-    color: #000;
-
+.nav__link::after{
+    content: '';
+    width: 0;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: #000;
+    transition: 0.7s;
 }
 
-.navbar .navlist2 li button:first-child
-,.navlist2 li button:nth-child(2){
-    border: solid 1px #000;
-    border-radius:50px;
+.nav__link:hover{
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.nav__link:hover::after{
+    width: 40%;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+}
+
+
+.navbar .navlist2 button{
+    border: solid 1px  #000;
+    border-radius: 40px;
+    padding: 5px 20px;
+}
+
+.navbar .navlist2 button:hover{
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .nav-button{
     background-color: #000;
     color: #fff;
 
+}
+.nav-button:hover{
+    background-color: #fff;
 }
 
 .row button{
@@ -248,31 +275,37 @@ a:hover{
 .copyrigth{
     color: rgb(131, 131, 131);  
 }
+/* ===================== toplist ===================== */
+.toplist{
+    border: none;
+    background: inherit;
 
+}
+
+.toplist i{
+    display: none;
+}
+
+/* ===================== sticky ===================== */
+.sticky{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: #fff;
+
+}
 
 @media only screen and (min-width:770px) {
-    .navbar{
-        justify-content: space-between;
-        padding: 0 2em;
-        padding-bottom: 20px;
-    }
-    .navlist{
-        justify-content: space-between;
-        display: flex;
-    }
-    .navlist a{
-        display: flex;
-    }
 
-    .navlist li{
-        margin-left: 20px;
+    .menu-icon{
+        display: none;
     }
-
-    .navbar .navlist1 li svg{
+/*    .navbar .navlist1 li svg{
         float: none;
         margin: 0;
         margin-top: -10px;
-    }
+    }*/
 
     .foot-list2{
         display: flex;
@@ -284,13 +317,14 @@ a:hover{
         margin-top: 12px;
         color: rgb(131, 131, 131); 
     }
+
 }
 
-@media only screen and (max-width:420px){
+/*@media only screen and (max-width:420px){
     .navbar .navlist1 li svg{
         margin-left: -45px;
     }
-}
+}*/
 
 @media only screen and (min-width:800px) {
     .row{
@@ -336,5 +370,115 @@ a:hover{
 
     .order2{
         order: 2;
+    }
+}
+
+/* ===================== effet scroll toplist ===================== */
+@media only screen and (max-width:970px) {
+  .foot-list1{
+    display: block;
+  }
+
+  .foot-list1 .foot_list1_li{
+    width: 100%;
+  }
+
+  .foot_list1_li{
+    width: 100%;
+    height: 63px;
+    overflow: hidden;
+    margin: 20px auto;
+    transition: height 0.4s ease-in-out;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .toplist{
+    display: flex;
+    width: 100%;
+    background: inherit;
+    border: none;
+    outline: none;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px ;
+  }
+
+  .toplist i{
+    display: block;
+}
+    
+}
+
+@media screen and (max-width: 800px) {
+    .menuList{
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100%;
+    width: 50%;
+    background-color: var(--bg-menu);
+    backdrop-filter: blur(16px);
+    padding: 7rem 5rem;
+    transition: 0.5s;
+    }
+
+    .nav__close{
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        transition: 0.5s;
+    }
+
+    .navlist{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        row-gap: 20px;
+        list-style: none;
+    }
+
+    .navlist2{
+        margin-top: 60px;
+    }
+
+    .showmenu{
+        transition: 0.4s;
+        right: 0;
+    }
+    
+}
+
+@media screen and (min-width: 800px) {
+    .navbar{
+        align-items: center;
+
+    }
+
+
+    .menuList{
+        display: flex;
+        width: 90%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navlist{
+        display: flex;
+        gap: 30px;
+        list-style: none;
+        justify-content: center;
+    }
+
+    .nav__close,
+    .nav__show{
+        display: none;
+    }
+
+    .nav__link,
+    .navlist2 button
+    {
+        display: flex;
+        font-weight: 700;
     }
 }
